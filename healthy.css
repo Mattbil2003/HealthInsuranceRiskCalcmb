@@ -1,0 +1,44 @@
+header {
+    background-color:transparent;
+    padding: 30px;
+    text-align: center;
+    font-size: 35px;
+    color: white;
+    font-family:Impact, Charcoal, sans-serif; 
+    border: white;
+  }
+ 
+  
+  label {
+    color: white;
+    font-size: 20px;
+    border-radius: 20%;
+  }
+  p
+  {
+    color:white
+  }
+  h1 {
+    color: white
+  }
+  h2 {
+    color: white
+  }
+  
+  body {
+    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
+  }
+  
+  @keyframes gradient {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }

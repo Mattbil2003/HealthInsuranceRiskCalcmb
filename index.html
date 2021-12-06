@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+<html lang="en">
+<meta charset="UTF-8">
+<link rel="stylesheet" href="healthy.css">
+
+<!--Title-->
+<head>
+<header style="text-align:center;" class="solid">Health Insurance Risk Calculator</header>
+</head>
+<!--Title-->
+<body>
+    <h1 style="text-align:center;">Instructions</h1>
+    <h2 style="text-align: center;">Take this survery to calculate the risk an insurance company would catagorize you under. Risk will be based on age, BMI, blood pressure, and if you have any of the listed diseases. Simply select your characteristics shown in the dropdown boxes below. 
+
+    </h2>
+    <br /><br />
+<!--Age box-->
+    <label>What is your age?</label>
+    <select id="age">
+        <option value="0">&lt 30</option>
+        <option value="10">&lt 45</option>
+        <option value="20">&lt 60</option>
+        <option value="30">&gt 60</option>
+    </select>
+<!--Age box-->
+
+<br /><br />
+<!--BloodPressure-->
+<h2>Calculate your blood pressure category using the diagram shown below.</h2>
+<img src="bloodpressure.JPG" alt="Blood Pressure Diagram" width="500" height="200">
+<br /><br />
+<label>What is your blood pressure category?</label>
+<select id = "bloodPressureID">
+    <option value="0">normal</option>
+    <option value="15">elevated</option>
+    <option value="30">stage1</option>
+    <option value="75">stage 2</option>
+    <option value="100">crisis</option>
+</select>
+<!--BloodPressure-->
+<br /><br />
+<!--Diabetes-->
+<label>Do you have diabetes?</label>
+    <select id = "diabetesID">
+        <option value="0">no</option>
+        <option value="10">yes</option>
+    </select>
+<!--Diabetes-->
+<br /><br />
+<!--Cancer-->
+<label>Do you have cancer?</label>
+    <select id = "cancerID">
+        <option value="0">no</option>
+        <option value="10">yes</option>
+    </select>
+<!--Cancer-->
+<br /><br />
+<!--Alzheimer's-->
+<label>Do you have Alzheimer's?</label>
+    <select id = "alzheimersID">
+        <option value="0">no</option>
+        <option value="10">yes</option>
+    </select>
+<!--Alzheimer's-->
+<br /><br />
+<!--BMI-->
+<h2>Let's calculate your BMI</h2>
+<label>What is your height?</label>
+<select id="heightID">
+    <option value="60">4'6</option>
+    <option value="60">4'7</option>
+    <option value="60">4'8</option>
+    <option value="60">4'9</option>
+    <option value="60">4'10</option>
+    <option value="60">4'11</option>
+    <option value="60">5'</option>
+    <option value="61">5'1</option>
+    <option value="62">5'2</option>
+    <option value="63">5'3</option>
+    <option value="64">5'4</option>
+    <option value="65">5'5</option>
+    <option value="66">5'6</option>
+    <option value="67">5'7</option>
+    <option value="68">5'8</option>
+    <option value="69">5'9</option>
+    <option value="70">5'10</option>
+    <option value="71">5'11</option>
+    <option value="72">6'</option>
+    <option value="73">6'1</option>
+    <option value="74">6'2</option>
+    <option value="75">6'3</option>
+    <option value="76">6'4</option>
+    <option value="77">6'5</option>
+    <option value="78">6'6</option>
+    <option value="79">6'7</option>
+    <option value="80">6'8</option>
+    <option value="81">6'9</option>
+    <option value="82">6'10</option>
+</select>
+<br /><br />
+<label>What is your approximate weight?</label>
+<select id="weightID">
+    <option value = "">80 lbs or less</option>
+    <option value = "90">90 lbs</option>
+    <option value = "100">100 lbs</option>
+    <option value = "110">110 lbs</option>
+    <option value = "120">120 lbs</option>
+    <option value = "130">130 lbs</option>
+    <option value = "140">140 lbs</option>
+    <option value = "150">150 lbs</option>
+    <option value = "160">160 lbs</option>
+    <option value = "170">170 lbs</option>
+    <option value = "180">180 lbs</option>
+    <option value = "190">190 lbs</option>
+    <option value = "200">200 lbs</option>
+    <option value = "210">210 lbs</option>
+    <option value = "220">220 lbs</option>
+    <option value = "230">230 lbs or more</option>
+</select>
+<br /><br />
+<button onclick="calculateBMI()">Calculate BMI</button>
+<p id="bmiResultID"></p>
+<p id= "bmiComment"></p>
+<!--BMI-->
+<br /><br />
+
+<button onclick="calculateRisk()">Calculate Risk</button>
+<p id="riskID"></p>
+<p id="riskIDMessage"></p>
+
+
+<script>
+    
+function calculateBMI(){
+//BMI
+let heightResponseInches = parseInt(document.getElementById("heightID").selectedOptions[0].value);
+    let weightResponselbs = parseInt(document.getElementById("weightID").selectedOptions[0].value);
+
+    let weightResponsekg = weightResponselbs * 0.453592
+    let heightResponsemeters = heightResponseInches * 0.0254
+    let BMI = weightResponsekg / Math.pow(heightResponsemeters, 2);
+
+    document.getElementById("bmiResultID").innerHTML = "Your Body Mass Index is:" + BMI;
+    console.log("BMI: " + BMI);
+//BMI score
+    let bmiScore = 0
+        if (BMI < 18.5) {
+            bmiScore = 75
+        }
+        else if (BMI <=24.9) {
+            bmiScore = 0
+        }
+        else if (BMI <=29.9) {
+            bmiScore = 30
+        }
+        else if (BMI >29.9) {
+            bmiScore = 75
+        }
+    let bmiMessage = ""
+    if (BMI < 18.5) {
+            bmiMessage = "You are below the average BMI for your dimensions"
+        }
+        else if (BMI <=24.9) {
+            bmiMessage = "You are normal"
+        }
+        else if (BMI <=29.9) {
+            bmiMessage = "You are overweight"
+        }
+        else if (BMI >29.9) {
+            bmiMessage = "You are obese"
+        }
+        console.log("bmi score: " + bmiScore);
+        console.log("bmi text: " + bmiMessage);
+
+        document.getElementById("bmiComment").innerHTML = bmiMessage
+
+}
+
+function calculateRisk(){
+//Age
+    let ageResponse = parseInt(document.getElementById("age").selectedOptions[0].value);
+    console.log("age: " + ageResponse);
+//Blood Pressure
+    let bloodPressureResponse = parseInt(document.getElementById("bloodPressureID").selectedOptions[0].value);
+    console.log("Blood Pressure: " + bloodPressureResponse);
+//Diabetes
+    let diabetesResponse = parseInt(document.getElementById("diabetesID").selectedOptions[0].value);
+    console.log("Diabetes: " + diabetesResponse);
+    //Alzhiemer's
+    let alzheimerResponse = parseInt(document.getElementById("alzheimersID").selectedOptions[0].value);
+    console.log("Alzheimers: " + alzheimerResponse);
+//Cancer
+    let cancerResponse = parseInt(document.getElementById("cancerID").selectedOptions[0].value);
+    console.log("Cancer: " + cancerResponse);
+//BMI
+    let heightResponseInches = parseInt(document.getElementById("heightID").selectedOptions[0].value);
+    let weightResponselbs = parseInt(document.getElementById("weightID").selectedOptions[0].value);
+
+    let weightResponsekg = weightResponselbs * 0.453592
+    let heightResponsemeters = heightResponseInches * 0.0254
+    let BMI = weightResponsekg / Math.pow(heightResponsemeters, 2);
+
+    document.getElementById("bmiResultID").innerHTML = "Your Body Mass Index is:" + BMI;
+    console.log("BMI: " + BMI);
+//BMI score
+let bmiScore = 0
+        if (BMI < 18.5) {
+            bmiScore = 75
+        }
+        else if (BMI <=24.9) {
+            bmiScore = 0
+        }
+        else if (BMI <=29.9) {
+            bmiScore = 30
+        }
+        else if (BMI >29.9) {
+            bmiScore = 75
+        }
+        
+        console.log("bmi score: " + bmiScore);
+//Total risk
+    let totalRisk = bmiScore + ageResponse + bloodPressureResponse + diabetesResponse + cancerResponse + alzheimerResponse
+    console.log("total Risk: " + totalRisk);
+    document.getElementById("riskID").innerHTML = "Your total risk is: " + totalRisk;
+
+//user message
+    let message = "uninsurable"
+        if (totalRisk <=20) {
+            message = "low risk"
+        } 
+        else if (totalRisk <= 50) {
+            message = "moderate risk"
+        } 
+        else if (totalRisk <= 75) {
+            message = "high risk"
+        }
+
+    document.getElementById("riskIDMessage").innerHTML = message
+    }
+</script>
+</body>
+</html>
